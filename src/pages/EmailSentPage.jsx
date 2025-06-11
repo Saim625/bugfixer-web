@@ -1,8 +1,21 @@
-// import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export const EmailSentPage = () => {
-  //   const location = useLocation();
-  //   const email = location.state?.email || "your email";
+  const location = useLocation();
+  const [email, setEmail] = useState();
+
+  useEffect(() => {
+    if (location.state?.email) {
+      setEmail(location.state.email);
+      sessionStorage.setItem("lastSentEmail", location.state.email);
+    } else {
+      const storedEmail = sessionStorage.getItem("lastSentEmail");
+      if (storedEmail) {
+        setEmail(storedEmail);
+      }
+    }
+  }, [location.state]);
 
   return (
     <div className="h-screen flex items-center justify-center bg-gray-50">
@@ -11,8 +24,7 @@ export const EmailSentPage = () => {
           Almost there!
         </h1>
         <p className="text-gray-700 mb-2">
-          We've sent a verification link to{" "}
-          <strong>saimsaaed526@gmail.com</strong>.
+          We've sent a verification link to <strong>{email}</strong>.
         </p>
         <p className="text-gray-600 mb-4">
           Please check your inbox and click the link to verify your account.

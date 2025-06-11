@@ -22,7 +22,7 @@ export default function VerifyEmailPage() {
       .get(`${BASE_URL}/verify-email`, { params: { token, id } })
       .then(() => {
         setStatus("Email verified successfully! Redirecting to login…");
-        setTimeout(() => navigate("/login?verified=true"), 3000);
+        setTimeout(() => navigate("/login?verified=true"), 2000);
       })
       .catch(() => {
         setStatus("Verification failed or link expired.");

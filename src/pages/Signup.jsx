@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "@/utils/constants";
 import { storeSignUpInfo } from "@/utils/userSlice";
+import { useDispatch } from "react-redux";
 
 export const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -11,6 +12,7 @@ export const Signup = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSignUp = async () => {
     try {
@@ -19,7 +21,8 @@ export const Signup = () => {
         { firstName, lastName, emailId, password },
         { withCredentials: true }
       );
-      navigate("/email-sent");
+      navigate("/email-sent", { state: { email: emailId } });
+      dispatch(storeSignUpInfo(res.data.user));
       console.log(res.data);
     } catch (errr) {
       console.log(errr.message);

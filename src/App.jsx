@@ -4,14 +4,16 @@ import { Login } from "@/pages/Login";
 import { Signup } from "@/pages/Signup";
 import { CompleteProfile } from "./pages/CompleteProfile";
 import VerifyEmailPage from "@/pages/VerifyEmailPage";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import appStore from "@/utils/appStore";
 import { EmailSentPage } from "@/pages/EmailSentPage";
+import { AuthLoader } from "@/components/AuthLoader";
 
 const App = () => {
   return (
     <Provider store={appStore}>
       <BrowserRouter basename="/">
+        <AuthLoader />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
