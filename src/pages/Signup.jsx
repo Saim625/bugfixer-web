@@ -11,6 +11,7 @@ export const Signup = () => {
   const [lastName, setLastName] = useState("");
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,8 +25,8 @@ export const Signup = () => {
       navigate("/email-sent", { state: { email: emailId } });
       dispatch(storeSignUpInfo(res.data.user));
       console.log(res.data);
-    } catch (errr) {
-      console.log(errr.message);
+    } catch (err) {
+      setError(err.response.data.message);
     }
   };
 
@@ -60,10 +61,19 @@ export const Signup = () => {
           onChange={(e) => setPassword(e.target.value)}
           className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+        {error && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+            role="alert"
+          >
+            <strong className="font-bold">Error! </strong>
+            <span className="block sm:inline">{error}</span>
+          </div>
+        )}
         <button
           type="button"
           onClick={handleSignUp}
-          className="w-full  bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+          className="w-full cursor-pointer px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium"
         >
           Sign Up
         </button>

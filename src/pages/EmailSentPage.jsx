@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { ResendVerification } from "../components/ResendVerification";
 
 export const EmailSentPage = () => {
   const location = useLocation();
@@ -30,9 +31,9 @@ export const EmailSentPage = () => {
           Please check your inbox and click the link to verify your account.
         </p>
         <p className="text-sm text-gray-500">
-          Didn't receive the email? Check your spam folder or try signing up
-          again.
+          Didn't receive the email? Check your spam folder or
         </p>
+        {email && <ResendVerification emailId={email} />}
       </div>
     </div>
   );
