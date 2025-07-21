@@ -16,10 +16,13 @@ const userSlice = createSlice({
       }
       return state; // Return current state instead of undefined
     },
+    logout: (state, action) => {
+      return null;
+    },
   },
 });
 
-export const { storeSignUpInfo, storeloginInfo, updateProfile } =
+export const { storeSignUpInfo, storeloginInfo, updateProfile, logout } =
   userSlice.actions;
 
 export default userSlice.reducer;

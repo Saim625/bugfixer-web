@@ -73,7 +73,7 @@ export const Login = () => {
         {showResend && <ResendVerification emailId={unverifiedEmail} />}
         <button
           type="button"
-          className="w-full cursor-pointer px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium"
+          className="w-full cursor-pointer px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg hover:from-indigo-600 hover:to-purple-700  transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium"
           onClick={handleLogin}
         >
           Log In

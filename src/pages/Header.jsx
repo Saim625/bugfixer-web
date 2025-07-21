@@ -1,11 +1,27 @@
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { Menu, LogOut, User } from "lucide-react";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { logout } from "../utils/userSlice";
 
 export const Header = () => {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   if (!user || !user.firstName) return null; // Hide on unauthenticated pages like login/signup/complete-profile
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
+      dispatch(logout);
+      navigate("/login");
+    } catch (err) {
+      console.log("Logout Error: " + err.message);
+      alert("An error occured during logout. Please try again");
+    }
+  };
 
   return (
     <header className="bg-white shadow-md border-b border-gray-200 sticky top-0 z-50">
@@ -39,7 +55,10 @@ export const Header = () => {
           >
             <User className="w-5 h-5 text-gray-600" />
           </Link>
-          <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition">
+          <button
+            onClick={handleLogout}
+            className="cursor-pointer p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition"
+          >
             <LogOut className="w-5 h-5 text-gray-600" />
           </button>
         </div>

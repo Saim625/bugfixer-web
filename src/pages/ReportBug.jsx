@@ -113,7 +113,7 @@ export const ReportBug = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex justify-center items-start p-4 md:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex justify-center items-start p-4 md:p-6">
       <div className="w-full max-w-3xl">
         {/* Header */}
         <div className="text-center mb-8">
@@ -206,7 +206,12 @@ export const ReportBug = () => {
               <input
                 type="file"
                 multiple
-                onChange={(e) => setFiles(Array.from(e.target.files))}
+                onChange={(e) => {
+                  const newFiles = Array.from(e.target.files);
+                  setFiles((prevFiles) =>
+                    [...prevFiles, ...newFiles].slice(0, 5)
+                  );
+                }}
                 accept=".png,.jpg,.jpeg,.pdf,.txt,.doc,.docx"
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
@@ -264,10 +269,10 @@ export const ReportBug = () => {
             type="submit"
             disabled={isSubmitting}
             onClick={handleSubmit}
-            className={`w-full py-4 rounded-xl font-semibold text-white transition-all duration-200 ${
+            className={`cursor-pointer w-full py-4 rounded-xl font-semibold text-white transition-all duration-200 ${
               isSubmitting
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98]"
+                : "bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 transform hover:scale-[1.02] active:scale-[0.98]"
             }`}
           >
             {isSubmitting ? (

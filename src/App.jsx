@@ -4,7 +4,7 @@ import { Login } from "@/pages/Login";
 import { Signup } from "@/pages/Signup";
 import { CompleteProfile } from "./pages/CompleteProfile";
 import VerifyEmailPage from "@/pages/VerifyEmailPage";
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import appStore from "@/utils/appStore";
 import { EmailSentPage } from "@/pages/EmailSentPage";
 import { AuthLoader } from "@/components/AuthLoader";
@@ -31,6 +31,7 @@ const App = () => {
           <Route path="/explore-bugs" element={<ExploreBugs />} />
           <Route path="/manage-bugs" element={<ManageBugs />} />
           <Route path="/report-bug" element={<ReportBug />} />
+          <Route path="/your-bugs" element={<ManageBugs />} />
         </Routes>
       </BrowserRouter>
     </Provider>
