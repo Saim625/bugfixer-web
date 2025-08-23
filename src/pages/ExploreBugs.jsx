@@ -13,12 +13,15 @@ import {
   Eye,
   X,
 } from "lucide-react";
+import FixRequestModal from "../utils/FixRequestModal";
 
 export const ExploreBugs = () => {
   const [bugs, setBugs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [openBug, setOpenBug] = useState(null);
+  const [FixReqModalOpen, setFixReqModalOpen] = useState(false);
+  const [bug, setBug] = useState(null);
 
   useEffect(() => {
     const fetchBugs = async () => {
@@ -279,7 +282,12 @@ export const ExploreBugs = () => {
                     </div>
                   </div>
 
-                  <button className="cursor-pointers px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105">
+                  <button
+                    onClick={() => {
+                      setFixReqModalOpen(true), setBug(bug);
+                    }}
+                    className="cursor-pointer px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"
+                  >
                     Request Fix
                   </button>
                 </div>
@@ -302,6 +310,11 @@ export const ExploreBugs = () => {
           </div>
         )}
       </div>
+      <FixRequestModal
+        isOpen={FixReqModalOpen}
+        onClose={() => setFixReqModalOpen(false)}
+        bug={bug}
+      />
     </div>
   );
 };

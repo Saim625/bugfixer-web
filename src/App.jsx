@@ -13,6 +13,7 @@ import { Header } from "./pages/Header";
 import { ExploreBugs } from "./pages/ExploreBugs";
 import { ManageBugs } from "./pages/ManageBugs";
 import { ReportBug } from "./pages/ReportBug";
+import { Toaster } from "sonner";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
       <BrowserRouter basename="/">
         <AuthLoader />
         <Header />
+        <Toaster position="top-center" theme="system" />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />

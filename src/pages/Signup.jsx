@@ -26,7 +26,8 @@ export const Signup = () => {
       dispatch(storeSignUpInfo(res.data.user));
       console.log(res.data);
     } catch (err) {
-      setError(err.response.data.message);
+      console.log(err);
+      setError(err?.response?.data?.message);
     }
   };
 
